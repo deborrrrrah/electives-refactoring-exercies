@@ -8,14 +8,14 @@ module Refactoring
       order_items.each do |order_item|
         if voucher == true
           if order_item.quantity > 10
-            price += (order_item.quantity * order_item.food.price) * 0.8
+            price += (order_item.quantity * order_item.item.price) * 0.8
           elsif order_item.quantity > 5
-            price += (order_item.quantity * order_item.food.price) * 0.9
+            price += (order_item.quantity * order_item.item.price) * 0.9
           elsif order_item.quantity > 2
-            price += (order_item.quantity * order_item.food.price) * 0.95
+            price += (order_item.quantity * order_item.item.price) * 0.95
           else
         else
-          price += order_item.quantity * order_item.food.price
+          price += order_item.quantity * order_item.item.price
         end
       end
   
