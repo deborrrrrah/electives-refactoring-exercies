@@ -17,7 +17,7 @@ module Refactoring
     end
 
     def returnable?
-      if ['book', 'electronic'].include?(@type)
+      if ['BOOK', 'ELECTRONIC'].include?(@type)
         true
       else
         false
@@ -25,30 +25,32 @@ module Refactoring
     end
 
     def tax_in_percent
-      case @type
-      when 'book'
+      case
+      when @type == 'BOOK'
         10
-      when 'food'
-        5
-      when 'electronic'
+      when @type == 'ELECTRONIC'
         15
+      when ['FOOD', 'DRINK', 'SNACK'].include?(@type)
+        5
       else 0
       end
     end
 
     private
     def validate_type(type)
-      ['book', 'food', 'electronic'].include?(type)
+      ['BOOK', 'ELECTRONIC', 'FOOD', 'DRINK', 'SNACK'].include?(type)
     end
 
     def validate_tags(type, tags)
-      case type
-      when 'book'
+      case
+      when type == 'BOOK'
         ['children', 'teen', 'adult', 'fiction', 'non-fiction'] & tags == tags
-      when 'food'
-        ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'] & tags == tags
-      when 'electronic'
+      when type == 'ELECTRONIC'
         ['household','office','hobby','sports'] & tags == tags
+      when type == 'DRINK'
+        ['dairy', 'vegetable', 'fruit', 'coffee', 'tea'] & tags == tags
+      when ['FOOD', 'SNACK'].include?(type)
+        ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'] & tags == tags
       else false
       end
     end
