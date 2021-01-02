@@ -2,6 +2,27 @@ module Refactoring
   class Order
     attr_reader :order_items
 
+    def calculate_price(tax, delivery_cost)
+      price = 0
+  
+      order_items.each do |order_item|
+        if voucher_code == true
+          if order_item.quantity > 10
+            price += (order_item.quantity * order_item.food.price) * 0.8
+          elsif order_item.quantity > 5
+            price += (order_item.quantity * order_item.food.price) * 0.9
+          elsif order_item.quantity > 2
+            price += (order_item.quantity * order_item.food.price) * 0.95
+          else
+        else
+          price += order_item.quantity * order_item.food.price
+        end
+      end
+  
+      price_after_tax = price + (tax * price)
+      total_price = price_after_tax + delivery_cost
+    end  
+
     def print_order_summary
       food_items = []
       drink_items = []
