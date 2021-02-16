@@ -13,14 +13,14 @@ module Refactoring
       end
       price_after_tax = price + (tax * price)
       total_price = price_after_tax + delivery_cost
-    end  
-
-    def print_order_summary
+    end
+    
+    def separate_items
       food_items = []
       drink_items = []
       snack_items = []
   
-      order_items.each do |order_item|
+      @order_items.each do |order_item|
         if order_item.food?
           food_items.append(order_item)
         elsif order_item.drink?
@@ -31,26 +31,25 @@ module Refactoring
           raise "item type#{order_item.item.type} is not supported"
         end
       end
+      return food_items, drink_items, snack_items
+    end
 
-      food_items_to_s_array = Array.new
-      food_items.each do |food_item| 
-        food_items_to_s_array << food_item.to_s
+    def items_array_to_s(items_array)
+      items_array_to_s_array = Array.new
+      items_array.each do |food_item| 
+        items_array_to_s_array << food_item.to_s
       end
-      food_items_to_s = food_items_to_s_array.join("")
+      items_array_to_s_array.join("")
+    end
 
-      drink_items_to_s_array = Array.new
-      drink_items.each do |drink_item| 
-        drink_items_to_s_array << drink_item.to_s
-      end
-      drink_items_to_s = drink_items_to_s_array.join("")
-
-      snack_items_to_s_array = Array.new
-      snack_items.each do |snack_item| 
-        snack_items_to_s_array << snack_item.to_s
-      end
-      snack_items_to_s = snack_items_to_s_array.join("")
-
+    def print_order_summary
+      food_items, drink_items, snack_items = separate_items
+      food_items_to_s = items_array_to_s(food_items)
+      drink_items_to_s = items_array_to_s(drink_items)
+      snack_items_to_s = items_array_to_s(snack_items)
       "Food items:\n#{ food_items_to_s }Drink items:\n#{ drink_items_to_s }Snack items:\n#{ snack_items_to_s }"
     end
+
+    private :separate_items, :items_array_to_s
   end
 end
