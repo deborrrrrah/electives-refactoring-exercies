@@ -19,11 +19,7 @@ module Refactoring
     end
 
     def returnable?
-      if ['BOOK', 'ELECTRONIC'].include?(@type)
-        true
-      else
-        false
-      end
+      @type.returnable?
     end
 
     def tax_in_percent
