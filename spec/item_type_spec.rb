@@ -26,5 +26,10 @@ RSpec.describe Refactoring::ItemType do
       type = 'BOOK'
       expect(described_class.create(type)).to be_a(Refactoring::BookItemType)
     end
+
+    it 'raise RuntimeError' do
+      type = 'OTHER'
+      expect{described_class.create(type)}.to raise_error(RuntimeError, 'item type OTHER is not supported')
+    end
   end
 end

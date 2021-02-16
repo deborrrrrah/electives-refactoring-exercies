@@ -19,7 +19,7 @@ module Refactoring
       when 'ELECTRONIC'
         return Refactoring::ElectronicItemType.new
       else
-        raise "item type#{order_item.item.type} is not supported"
+        raise "item type #{ type } is not supported"
       end
     end
   end
