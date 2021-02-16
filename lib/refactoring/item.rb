@@ -1,4 +1,4 @@
-require './lib/refactoring/item_type.rb'
+require './lib/refactoring/item_types/item_type.rb'
 
 module Refactoring
   class Item
