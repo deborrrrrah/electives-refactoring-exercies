@@ -1,3 +1,5 @@
+require './lib/refactoring/item_type.rb'
+
 module Refactoring
   class Item
     attr_reader :name, :price, :type, :stock, :tags
@@ -6,7 +8,7 @@ module Refactoring
       type_valid = validate_type(type)
       tags_valid = validate_tags(type, tags)
       if type_valid and tags_valid
-        @type = type
+        @type = ItemType.create(type)
         @name = name
         @price = price
         @stock =  stock
@@ -25,15 +27,7 @@ module Refactoring
     end
 
     def tax_in_percent
-      case
-      when @type == 'BOOK'
-        10
-      when @type == 'ELECTRONIC'
-        15
-      when ['FOOD', 'DRINK', 'SNACK'].include?(@type)
-        5
-      else 0
-      end
+      @type.tax_in_percent
     end
 
     private
