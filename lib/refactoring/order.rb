@@ -6,7 +6,7 @@ module Refactoring
       @order_items = Array.new
     end
 
-    def calculate_price(voucher, tax, delivery_cost)
+    def calculate_price(voucher, delivery_cost, tax=0)
       price = 0
       order_items.each do |order_item|
         price += order_item.calculate_price(voucher)
