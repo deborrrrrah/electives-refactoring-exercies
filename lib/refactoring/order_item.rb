@@ -26,6 +26,22 @@ module Refactoring
       end
     end
 
+    def to_s 
+      "#{ @quantity } #{ @item }"
+    end
+
+    def food?
+      @item.food?
+    end
+
+    def drink?
+      @item.drink?
+    end
+
+    def snack?
+      @item.snack?
+    end
+
     private :calculate_discount_price
   end
 end

@@ -21,30 +21,36 @@ module Refactoring
       snack_items = []
   
       order_items.each do |order_item|
-        case order_item.item.type
-        when "FOOD"
+        if order_item.food?
           food_items.append(order_item)
-        when "DRINK"
+        elsif order_item.drink?
           drink_items.append(order_item)
-        when "SNACK"
+        elsif order_item.snack?
           snack_items.append(order_item)
         else
           raise "item type#{order_item.item.type} is not supported"
         end
       end
 
-      print "Food items:\n"
-      food_items.each do |food_item|
-        print "#{food_item.quantity} #{food_item.item.name}"
+      food_items_to_s_array = Array.new
+      food_items.each do |food_item| 
+        food_items_to_s_array << food_item.to_s
       end
-      print "Drink items:\n"
-      drink_items.each do |drink_item|
-        print "#{drink_item.quantity} #{drink_item.item.name}"
+      food_items_to_s = food_items_to_s_array.join("")
+
+      drink_items_to_s_array = Array.new
+      drink_items.each do |drink_item| 
+        drink_items_to_s_array << drink_item.to_s
       end
-      print "Snack items:\n"
-      snack_items.each do |snack_item|
-        print "#{snack_item.quantity} #{snack_item.item.name}"
+      drink_items_to_s = drink_items_to_s_array.join("")
+
+      snack_items_to_s_array = Array.new
+      snack_items.each do |snack_item| 
+        snack_items_to_s_array << snack_item.to_s
       end
+      snack_items_to_s = snack_items_to_s_array.join("")
+
+      "Food items:\n#{ food_items_to_s }Drink items:\n#{ drink_items_to_s }Snack items:\n#{ snack_items_to_s }"
     end
   end
 end
