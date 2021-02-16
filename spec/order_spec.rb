@@ -40,7 +40,7 @@ RSpec.describe Refactoring::Order do
     end
 
     describe '#print_order_summary' do
-      before(:all) do
+      before(:each) do
         @items = [
           Refactoring::Item.new('BOOK', 'Handphone', 10000, 5, ['teen']),
           Refactoring::Item.new('ELECTRONIC', 'Handphone', 10000, 5, ['household']),
@@ -58,6 +58,11 @@ RSpec.describe Refactoring::Order do
       it 'return normal string' do
         expected = "Food items:\n1 Red VelvetDrink items:\n2 LemonadeSnack items:\n3 Choco Pie"
         expect(@order.print_order_summary).to eq(expected)
+      end
+
+      it 'raise RuntimeError when contains Book Item Type' do
+        @order.order_items << Refactoring::OrderItem.new(@items[0], 4)
+        expect{@order.print_order_summary}.to raise_error(RuntimeError)
       end
     end
   end
