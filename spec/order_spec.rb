@@ -1,4 +1,4 @@
-require 'refactoring'
+require 'spec_helper'
 
 RSpec.describe Refactoring::Order do
   context 'when order items are initialize' do
