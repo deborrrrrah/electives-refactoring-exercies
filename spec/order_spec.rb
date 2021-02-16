@@ -64,6 +64,11 @@ RSpec.describe Refactoring::Order do
         @order.order_items << Refactoring::OrderItem.new(@items[0], 4)
         expect{@order.print_order_summary}.to raise_error(RuntimeError)
       end
+
+      it 'raise RuntimeError when contains Electronic Item Type' do
+        @order.order_items << Refactoring::OrderItem.new(@items[1], 5)
+        expect{@order.print_order_summary}.to raise_error(RuntimeError)
+      end
     end
   end
 end
