@@ -1,5 +1,9 @@
 module Refactoring
   class SnackItemType
+    def tags_valid?(tags)
+      ['meat', 'dairy', 'vegetable', 'fruit', 'pastry'] & tags == tags
+    end
+
     def returnable?
       false
     end

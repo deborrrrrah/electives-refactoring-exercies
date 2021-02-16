@@ -1,5 +1,9 @@
 module Refactoring
   class DrinkItemType
+    def tags_valid?(tags)
+      ['dairy', 'vegetable', 'fruit', 'coffee', 'tea'] & tags == tags
+    end
+
     def returnable?
       false
     end

@@ -12,6 +12,12 @@ RSpec.describe Refactoring::Item do
       ]
     end
 
+    describe '#initialize' do
+      it 'raise ArgumentError' do
+        expect{described_class.new('BOOK', 'Handphone', 10000, 5, ['household'])}.to raise_error(ArgumentError)
+      end
+    end
+
     describe '#tax_in_percent' do
       it "return 10 when item is Book" do
         result = @items[0].tax_in_percent
