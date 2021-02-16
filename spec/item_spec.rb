@@ -27,6 +27,16 @@ RSpec.describe Refactoring::Item do
         result = @items[2].tax_in_percent
         expect(result).to eq(5)
       end
+
+      it "return 5 when item is Drink" do
+        result = @items[3].tax_in_percent
+        expect(result).to eq(5)
+      end
+
+      it "return 5 when item is Snack" do
+        result = @items[4].tax_in_percent
+        expect(result).to eq(5)
+      end
     end
 
     describe '#returnable?' do
