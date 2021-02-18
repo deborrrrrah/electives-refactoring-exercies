@@ -56,9 +56,5 @@ module Refactoring
       end
       other_items
     end
-
-    def print_order_summary
-      OrderView.new(self).print_order_summary
-    end
   end
 end
