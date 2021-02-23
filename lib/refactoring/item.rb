@@ -31,16 +31,8 @@ module Refactoring
       "#{ @name }"
     end
 
-    def food?
-      @type.instance_of? FoodItemType
-    end
-
-    def drink?
-      @type.instance_of? DrinkItemType
-    end
-
-    def snack?
-      @type.instance_of? SnackItemType
+    def is_type?(type)
+      @type.instance_of? type
     end
   end
 end

@@ -32,16 +32,8 @@ module Refactoring
       "#{ @quantity } #{ @item }"
     end
 
-    def food?
-      @item.food?
-    end
-
-    def drink?
-      @item.drink?
-    end
-
-    def snack?
-      @item.snack?
+    def is_type?(type)
+      @item.is_type?(type)
     end
 
     private :calculate_discount_price

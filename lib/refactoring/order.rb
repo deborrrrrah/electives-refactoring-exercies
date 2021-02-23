@@ -1,4 +1,7 @@
 require './lib/refactoring/order_view.rb'
+require './lib/refactoring/item_types/food_item_type.rb'
+require './lib/refactoring/item_types/drink_item_type.rb'
+require './lib/refactoring/item_types/snack_item_type.rb'
 
 module Refactoring
   class Order
@@ -17,44 +20,32 @@ module Refactoring
       total_price = price_after_tax + delivery_cost
     end
 
-    def food_items
-      food_items = Array.new
+    def group_items_based_on(type)
+      group_items = Array.new
       @order_items.each do |order_item|
-        if order_item.food?
-          food_items << order_item
+        if order_item.is_type?(type)
+          group_items << order_item
         end
       end
-      food_items
+      group_items
+    end
+
+    def food_items
+      group_items_based_on(FoodItemType)
     end
 
     def drink_items
-      drink_items = Array.new
-      @order_items.each do |order_item|
-        if order_item.drink?
-          drink_items << order_item
-        end
-      end
-      drink_items
+      group_items_based_on(DrinkItemType)
     end
 
     def snack_items
-      snack_items = Array.new
-      @order_items.each do |order_item|
-        if order_item.snack?
-          snack_items << order_item
-        end
-      end
-      snack_items
+      group_items_based_on(SnackItemType)
     end
 
     def other_items
-      other_items = Array.new
-      @order_items.each do |order_item|
-        if !order_item.snack? && !order_item.food? && !order_item.drink?
-          other_items << order_item
-        end
-      end
-      other_items
+      @order_items - food_items - drink_items - snack_items
     end
+
+    private :group_items_based_on
   end
 end
