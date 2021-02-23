@@ -6,8 +6,8 @@ module Refactoring
 
     def items_array_to_s(items_array)
       items_array_to_s_array = Array.new
-      items_array.each do |food_item| 
-        items_array_to_s_array << food_item.to_s
+      items_array.each do |item| 
+        items_array_to_s_array << item.to_s
       end
       items_array_to_s_array.join("")
     end
@@ -15,7 +15,7 @@ module Refactoring
     def print_order_summary
       other_items = @order.other_items
       if other_items.length > 0
-        raise "item type#{other_items[0].type} is not supported"
+        raise "item type#{ other_items[0].type } is not supported"
       end
       food_items_to_s = items_array_to_s(@order.food_items)
       drink_items_to_s = items_array_to_s(@order.drink_items)

@@ -5,7 +5,7 @@ require './lib/refactoring/item_types/snack_item_type.rb'
 
 module Refactoring
   class Item
-    attr_reader :name, :price, :type, :stock, :tags
+    attr_reader :price, :type
 
     def initialize(type, name, price, stock, tags)
       @type = ItemType.create(type)
